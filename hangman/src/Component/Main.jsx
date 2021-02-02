@@ -1,24 +1,37 @@
-import React, { Component } from 'react'
-import Middle from './Middle'
+import React, { Component } from "react";
+
 
 export default class Main extends Component {
 
-    constructor () {
-        super()
-        this.state = {
-            beta = "ismail"
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      word: "",
+      isHanged: false,
+      
+    };
+  }
 
-    func = () => {
-        console.log("hello world")
-    }
+  componentDidMount() {
+    fetch("https://random-word-api.herokuapp.com/word?number=1")
+      .then((res) => res.json())
+      .then((data) => this.setState({ word: data[0] }));
+  }
 
-    render() {
-        return (
-            <div>
-                <Middle gamma={this.func} />
-            </div>
-        )
-    }
+  handlePlayAgain = () => {
+    this.setState({})
+  }
+
+  render() {
+    console.log(this.state);
+    return (
+      <div>
+      
+        <div>
+          <button > Hint</button>
+          <button onClick={this.handlePlayAgain}> Play Again</button>
+        </div>
+      </div>
+    );
+  }
 }
